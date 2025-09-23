@@ -31,3 +31,28 @@ void vecAdd(float* A, float* B, float* C, int n) {
     cudaFree(B_d);
     cudaFree(C_d);
 }
+
+
+int main() {
+    int n = 1 << 10; // 1024 elements
+    float *A = new float[n];
+    float *B = new float[n];
+    float *C = new float[n];
+
+    for (int i = 0; i < n; i++) {
+        A[i] = 1.0f;
+        B[i] = 2.0f;
+    }
+
+    vecAdd(A, B, C, n);
+
+    // Print first 5 results
+    for (int i = 0; i < 5; i++) {
+        std::cout << A[i] << " + " << B[i] << " = " << C[i] << std::endl;
+    }
+
+    delete[] A;
+    delete[] B;
+    delete[] C;
+    return 0;
+}
