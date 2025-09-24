@@ -1,5 +1,7 @@
 #include <cuda_runtime.h>
-#include <cmath> // for ceil if needed
+#include <cmath>
+# include <iostream>
+using namespace std;
 
 __global__
 void vecAddKernel(float* A, float* B, float* C, int n) {
