@@ -1,4 +1,4 @@
-## Useful commands for processes
+### Useful commands for processes
 
 - `nano file_name.cu`
 - Ctrl + O <- for saving,
