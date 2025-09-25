@@ -1,5 +1,6 @@
 #include <cuda_runtime.h>
 #include <cmath>
+#include <cuda_runtime.h>
 # include <iostream>
 using namespace std;
 
@@ -26,7 +27,10 @@ void vecAdd(float* A, float* B, float* C, int n) {
     int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 
     vecAddKernel<<<blocksPerGrid, threadsPerBlock>>>(A_d, B_d, C_d, n);
-
+    cudaError_t err = cudaGetLastError();  
+    if (err != cudaSuccess){    
+        std::cerr<<"Kernel launch error: " <<cudaGetErrorString(err) << std::endl;
+    }     
     cudaMemcpy(C, C_d, size, cudaMemcpyDeviceToHost);
 
     cudaFree(A_d);
